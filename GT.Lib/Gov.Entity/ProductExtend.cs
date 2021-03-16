@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Gov.Entity
 {
-    public class ProductExtend : EntityBase
+    public partial class ProductExtend : EntityBase
     {
         /// <summary>
         /// 产品详情

@@ -8,7 +8,7 @@ namespace Gov.Entity
     /// <summary>
     /// 账号扩展表
     /// </summary>
-    public class AccountExtend : EntityBase
+    public partial class AccountExtend : EntityBase
     {
         /// <summary>
         /// 真实姓名
