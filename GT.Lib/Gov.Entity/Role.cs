@@ -21,6 +21,13 @@ namespace Gov.Entity
         [MaxLength(30)]
         public string Icon { get; set; }
 
-
+        /// <summary>
+        /// 多对多关联账号
+        /// </summary>
+        public List<Account> Accounts { get; set; }
+        /// <summary>
+        /// 多对多关联权限组
+        /// </summary>
+        public List<AuthorityGroup> AuthorityGroups { get; set; }
     }
 }

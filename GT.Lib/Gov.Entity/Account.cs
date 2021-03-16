@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Gov.Entity
@@ -51,5 +52,6 @@ namespace Gov.Entity
         public string Avatar { get; set; }
 
         public AccountExtend Extend { get; set; }
+        public List<Role> Roles { get; set; }
     }
 }
