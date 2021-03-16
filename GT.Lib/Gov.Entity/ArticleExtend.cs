@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gov.Entity
 {
-    public partial class ArticleExtend
+    /// <summary>
+    /// 文章扩展信息
+    /// </summary>
+    public partial class ArticleExtend : EntityBase
     {
-        [Key]
-        public Guid Id { get; set; }
         public string Content { get; set; }
     }
 }

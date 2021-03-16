@@ -35,7 +35,14 @@ namespace Gov.Entity
         /// 文章扩展内容
         /// </summary>
         public ArticleExtend Extend { get; set; }
+        /// <summary>
+        /// 所属目录
+        /// </summary>
         public ArticleCatalog Catalog { get; set; }
+        /// <summary>
+        /// 评论
+        /// </summary>
+        public List<Comment> Comments { get; set; }
 
     }
 }
