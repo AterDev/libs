@@ -29,5 +29,9 @@ namespace Gov.Entity
         /// 多对多关联权限组
         /// </summary>
         public List<AuthorityGroup> AuthorityGroups { get; set; }
+        /// <summary>
+        /// 多对多关联菜单
+        /// </summary>
+        public List<Menu> Menus { get; set; }
     }
 }
