@@ -27,8 +27,8 @@ namespace Gov.Context
         public DbSet<Personnel> Personnels { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCatalog> ProductCatalogs { get; set; }
-        public DbSet<ProductExtend> ProductExtends{ get; set; }
-        public DbSet<Role> Roles{ get; set; }
+        public DbSet<ProductExtend> ProductExtends { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         public GovContext([NotNull] DbContextOptions options) : base(options)
         {
@@ -56,7 +56,133 @@ namespace Gov.Context
                 e.HasIndex(a => a.Country);
                 e.HasIndex(a => a.Province);
                 e.HasIndex(a => a.City);
+            });
 
+            builder.Entity<ActionLog>(e =>
+            {
+                e.HasIndex(m => m.Status);
+                e.HasIndex(m => m.ActionType);
+                e.HasIndex(m => m.CreatedTime);
+                e.HasIndex(m => m.Username);
+                e.HasIndex(m => m.UserId);
+            });
+
+            builder.Entity<ApproveFlow>(e =>
+            {
+                e.HasIndex(m => m.Name);
+            });
+            builder.Entity<ApproveFlowSteps>(e =>
+            {
+                e.HasIndex(m => m.Step);
+                e.HasIndex(m => m.UserId);
+                e.HasIndex(m => m.RoleId);
+            });
+            builder.Entity<ApproveFlowStatus>(e =>
+            {
+                e.HasIndex(m => m.CreatedTime);
+                e.HasIndex(m => m.TargetId);
+                e.HasIndex(m => m.RoleId);
+                e.HasIndex(m => m.UserId);
+            });
+            builder.Entity<Article>(e =>
+            {
+                e.HasIndex(m => m.AuthorName);
+                e.HasIndex(m => m.CreatedTime);
+                e.HasIndex(m => m.Status);
+                e.HasIndex(m => m.Title);
+
+            });
+            builder.Entity<ArticleCatalog>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.Level);
+                e.HasIndex(m => m.Type);
+            });
+            builder.Entity<ArticleExtend>(e =>
+            {
+
+            });
+            builder.Entity<Authority>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.Type);
+            });
+            builder.Entity<AuthorityGroup>(e =>
+            {
+                e.HasIndex(m => m.Name);
+            });
+            builder.Entity<Comment>(e =>
+            {
+                e.HasIndex(m => m.Status);
+            });
+            builder.Entity<Dictionary>(e =>
+            {
+                e.HasIndex(m => m.Key);
+                e.HasIndex(m => m.Type);
+                e.HasIndex(m => m.ValType);
+            });
+            builder.Entity<EnterpriseInfo>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.RegDate);
+                e.HasIndex(m => m.Type);
+                e.HasIndex(m => m.RegistrationStatus);
+                e.HasIndex(m => m.RegisteredCapital);
+                e.HasIndex(m => m.UnionCode);
+                e.HasIndex(m => m.Corporation);
+                e.HasIndex(m => m.EndDate);
+            });
+            builder.Entity<EnterpriseExtend>(e =>
+            {
+                //e.HasIndex(m => m.);
+            });
+            builder.Entity<Menu>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.Type);
+                e.HasIndex(m => m.Status);
+            });
+            builder.Entity<Organization>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.Level);
+                e.HasIndex(m => m.Province);
+                e.HasIndex(m => m.Country);
+                e.HasIndex(m => m.City);
+                e.HasIndex(m => m.Status);
+            });
+            builder.Entity<Personnel>(e =>
+            {
+                e.HasIndex(m => m.PositionTitle);
+                e.HasIndex(m => m.RealName);
+                e.HasIndex(m => m.Country);
+                e.HasIndex(m => m.City);
+                e.HasIndex(m => m.Province);
+                e.HasIndex(m => m.JobTitle);
+                e.HasIndex(m => m.IdentityCard);
+                e.HasIndex(m => m.IsFullTime);
+                e.HasIndex(m => m.HireDate);
+            });
+            builder.Entity<Product>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.Status);
+                e.HasIndex(m => m.Title);
+                e.HasIndex(m => m.UniqueCode);
+            });
+            builder.Entity<ProductCatalog>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.Type);
+            });
+            builder.Entity<ProductExtend>(e =>
+            {
+                //e.HasIndex(m => m.);
+            });
+            builder.Entity<Role>(e =>
+            {
+                e.HasIndex(m => m.Name);
+                e.HasIndex(m => m.Status);
             });
 
             base.OnModelCreating(builder);

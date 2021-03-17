@@ -18,6 +18,11 @@ namespace Gov.Entity
         [MaxLength(100)]
         public string Title { get; set; }
         /// <summary>
+        /// 编码
+        /// </summary>
+        [MaxLength(60)]
+        public string UniqueCode { get; set; }
+        /// <summary>
         /// 描述
         /// </summary>
         [MaxLength(1000)]
