@@ -7,7 +7,7 @@ namespace Gov.Entity
     /// <summary>
     /// 审批流配置表
     /// </summary>
-    public class ApproveFlowRelation
+    public partial class ApproveFlowRelation : EntityBase
     {
         public Guid TargetId { get; set; }
         public Guid FlowId { get; set; }

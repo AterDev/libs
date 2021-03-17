@@ -7,10 +7,10 @@ namespace Gov.Entity
     /// </summary>
     public class EntityBase
     {
-        public virtual DateTimeOffset UpdatedTime { get; set; } = DateTimeOffset.Now;
+        public virtual DateTimeOffset? UpdatedTime { get; set; } = DateTimeOffset.Now;
         public virtual Status Status { get; set; } = Status.Default;
         public virtual Guid Id { get; set; }
-        public virtual DateTimeOffset CreatedTime { get; set; }
+        public virtual DateTimeOffset? CreatedTime { get; set; }
     }
 
     /// <summary>

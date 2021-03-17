@@ -21,6 +21,10 @@ namespace Gov.Entity
         [MaxLength(40)]
         public string NickName { get; set; }
         /// <summary>
+        /// 出生日期
+        /// </summary>
+        public DateTimeOffset? Birthday { get; set; }
+        /// <summary>
         /// 地址
         /// </summary>
         [MaxLength(100)]

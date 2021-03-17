@@ -31,7 +31,7 @@ namespace Gov.Web
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddDbContext<GovContext>(option =>
             {
-                option.UseMySQL(connectionString);
+                option.UseMySQL(connectionString,op=>op.MigrationsAssembly("Gov.Context"));
             });
 
             services.AddControllers();

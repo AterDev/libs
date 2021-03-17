@@ -37,11 +37,11 @@ namespace Gov.Entity
         /// <summary>
         /// 注册时间
         /// </summary>
-        public DateTimeOffset RegDate { get; set; }
+        public DateTimeOffset? RegDate { get; set; }
         /// <summary>
         /// 营业期限
         /// </summary>
-        public DateTimeOffset EndDate { get; set; } = DateTimeOffset.MinValue;
+        public DateTimeOffset? EndDate { get; set; } = DateTimeOffset.MinValue;
         /// <summary>
         /// 登记机关
         /// </summary>
@@ -56,7 +56,7 @@ namespace Gov.Entity
         /// 经营范围
         /// </summary>
         [MaxLength(1000)]
-        public string  BusinessScope{ get; set; }
+        public string BusinessScope { get; set; }
         /// <summary>
         /// 法人名称
         /// </summary>

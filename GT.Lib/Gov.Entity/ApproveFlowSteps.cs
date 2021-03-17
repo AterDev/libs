@@ -7,6 +7,11 @@ namespace Gov.Entity
 {
     public class ApproveFlowSteps : EntityBase
     {
+        /// <summary>
+        /// 当前步骤名称
+        /// </summary>
+        [MaxLength(30)]
+        public string Name { get; set; }
         public int Step { get; set; } = 0;
         /// <summary>
         /// 是否全通过审核  且或关系，全部审核通过或，只需要一人审核通过

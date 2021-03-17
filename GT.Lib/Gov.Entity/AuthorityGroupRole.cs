@@ -6,7 +6,7 @@ using System.Text;
 namespace Gov.Entity
 {
     // 角色权限组关联表
-    public class RoleAuthorityGroup
+    public partial class AuthorityGroupRole : EntityBase
     {
         [ForeignKey("RoleId")]
         public Role Role { get; set; }

@@ -21,7 +21,7 @@ namespace Gov.Entity
         /// <summary>
         /// 出生日期
         /// </summary>
-        public DateTimeOffset Birthday { get; set; }
+        public DateTimeOffset? Birthday { get; set; }
         /// <summary>
         /// 身份证号
         /// </summary>
@@ -30,7 +30,7 @@ namespace Gov.Entity
         /// <summary>
         /// 入职时间
         /// </summary>
-        public DateTimeOffset HireDate{ get; set; }
+        public DateTimeOffset? HireDate { get; set; }
         /// <summary>
         /// 合同类型
         /// </summary>
