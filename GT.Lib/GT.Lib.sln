@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.Entity", "Gov.Entity\Gov.Entity.csproj", "{470B9C88-B995-4E38-A58F-8EFF28202357}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gov.Entity", "Gov.Entity\Gov.Entity.csproj", "{470B9C88-B995-4E38-A58F-8EFF28202357}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.Context", "Gov.Context\Gov.Context.csproj", "{A9E3F848-AD83-407C-B6D7-093C79B0AF32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{470B9C88-B995-4E38-A58F-8EFF28202357}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{470B9C88-B995-4E38-A58F-8EFF28202357}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{470B9C88-B995-4E38-A58F-8EFF28202357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E3F848-AD83-407C-B6D7-093C79B0AF32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E3F848-AD83-407C-B6D7-093C79B0AF32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E3F848-AD83-407C-B6D7-093C79B0AF32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E3F848-AD83-407C-B6D7-093C79B0AF32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
