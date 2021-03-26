@@ -29,6 +29,9 @@ namespace Gov.Context
         public DbSet<ProductCatalog> ProductCatalogs { get; set; }
         public DbSet<ProductExtend> ProductExtends { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<WorkOrderExecutor> WorkOrderExecutors { get; set; }
+        public DbSet<WorkOrderFlowLog> WorkOrderFlowLogs { get; set; }
 
         public GovContext([NotNull] DbContextOptions options) : base(options)
         {
@@ -185,6 +188,27 @@ namespace Gov.Context
                 e.HasIndex(m => m.Status);
             });
 
+            builder.Entity<WorkOrder>(e =>
+            {
+                e.HasIndex(m => m.UniqueCode);
+                e.HasIndex(m => m.Type);
+                e.HasIndex(m => m.Priority);
+                e.HasIndex(m => m.StartDate);
+                e.HasIndex(m => m.EndDate);
+                e.HasIndex(m => m.TargetName);
+                e.HasIndex(m => m.Status);
+            });
+            builder.Entity<WorkOrderExecutor>(e =>
+            {
+                e.HasIndex(m => m.Status);
+                e.HasIndex(m => m.CreatedTime);
+            });
+
+            builder.Entity<WorkOrderFlowLog>(e =>
+            {
+                e.HasIndex(m => m.Status);
+                e.HasIndex(m => m.CreatedTime);
+            });
             base.OnModelCreating(builder);
         }
     }

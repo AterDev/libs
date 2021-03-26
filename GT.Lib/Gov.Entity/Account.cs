@@ -53,5 +53,6 @@ namespace Gov.Entity
 
         public AccountExtend Extend { get; set; }
         public List<Role> Roles { get; set; }
+        public List<WorkOrderExecutor> WorkOrderExecutors { get; set; }
     }
 }
