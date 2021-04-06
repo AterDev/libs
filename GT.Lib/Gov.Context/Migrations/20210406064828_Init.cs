@@ -299,6 +299,33 @@ namespace Gov.Context.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WorkOrders",
+                columns: table => new
+                {
+                    Id = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    UniqueCode = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true),
+                    Type = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
+                    Priority = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
+                    Content = table.Column<string>(type: "text", maxLength: 5000, nullable: true),
+                    Remark = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true),
+                    PrincipalName = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true),
+                    PrincipalPhone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
+                    StartDate = table.Column<DateTimeOffset>(type: "timestamp", nullable: false),
+                    EndDate = table.Column<DateTimeOffset>(type: "timestamp", nullable: false),
+                    AddressOrUrl = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true),
+                    TargetName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Status = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
+                    CompleteCount = table.Column<int>(type: "int", nullable: false),
+                    TotalCount = table.Column<int>(type: "int", nullable: false),
+                    UpdatedTime = table.Column<DateTimeOffset>(type: "timestamp", nullable: true),
+                    CreatedTime = table.Column<DateTimeOffset>(type: "timestamp", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkOrders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Accounts",
                 columns: table => new
                 {
@@ -578,6 +605,36 @@ namespace Gov.Context.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WorkOrderExecutors",
+                columns: table => new
+                {
+                    Id = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    WorkOrderId = table.Column<byte[]>(type: "varbinary(16)", nullable: true),
+                    ExecutorId = table.Column<byte[]>(type: "varbinary(16)", nullable: true),
+                    Status = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
+                    Feedback = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true),
+                    Remark = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true),
+                    UpdatedTime = table.Column<DateTimeOffset>(type: "timestamp", nullable: true),
+                    CreatedTime = table.Column<DateTimeOffset>(type: "timestamp", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkOrderExecutors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkOrderExecutors_Accounts_ExecutorId",
+                        column: x => x.ExecutorId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WorkOrderExecutors_WorkOrders_WorkOrderId",
+                        column: x => x.WorkOrderId,
+                        principalTable: "WorkOrders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -595,6 +652,29 @@ namespace Gov.Context.Migrations
                         name: "FK_Comments_Articles_ArticleId",
                         column: x => x.ArticleId,
                         principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkOrderFlowLogs",
+                columns: table => new
+                {
+                    Id = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    WorkOrderExecutorId = table.Column<byte[]>(type: "varbinary(16)", nullable: true),
+                    Content = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Result = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
+                    UpdatedTime = table.Column<DateTimeOffset>(type: "timestamp", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreatedTime = table.Column<DateTimeOffset>(type: "timestamp", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkOrderFlowLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkOrderFlowLogs_WorkOrderExecutors_WorkOrderExecutorId",
+                        column: x => x.WorkOrderExecutorId,
+                        principalTable: "WorkOrderExecutors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1028,6 +1108,76 @@ namespace Gov.Context.Migrations
                 name: "IX_Roles_Status",
                 table: "Roles",
                 column: "Status");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrderExecutors_CreatedTime",
+                table: "WorkOrderExecutors",
+                column: "CreatedTime");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrderExecutors_ExecutorId",
+                table: "WorkOrderExecutors",
+                column: "ExecutorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrderExecutors_Status",
+                table: "WorkOrderExecutors",
+                column: "Status");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrderExecutors_WorkOrderId",
+                table: "WorkOrderExecutors",
+                column: "WorkOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrderFlowLogs_CreatedTime",
+                table: "WorkOrderFlowLogs",
+                column: "CreatedTime");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrderFlowLogs_Status",
+                table: "WorkOrderFlowLogs",
+                column: "Status");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrderFlowLogs_WorkOrderExecutorId",
+                table: "WorkOrderFlowLogs",
+                column: "WorkOrderExecutorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_EndDate",
+                table: "WorkOrders",
+                column: "EndDate");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_Priority",
+                table: "WorkOrders",
+                column: "Priority");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_StartDate",
+                table: "WorkOrders",
+                column: "StartDate");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_Status",
+                table: "WorkOrders",
+                column: "Status");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_TargetName",
+                table: "WorkOrders",
+                column: "TargetName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_Type",
+                table: "WorkOrders",
+                column: "Type");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_UniqueCode",
+                table: "WorkOrders",
+                column: "UniqueCode");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1075,7 +1225,7 @@ namespace Gov.Context.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "WorkOrderFlowLogs");
 
             migrationBuilder.DropTable(
                 name: "ApproveFlows");
@@ -1099,13 +1249,22 @@ namespace Gov.Context.Migrations
                 name: "ProductExtends");
 
             migrationBuilder.DropTable(
-                name: "AccountExtends");
+                name: "WorkOrderExecutors");
 
             migrationBuilder.DropTable(
                 name: "ArticleExtends");
 
             migrationBuilder.DropTable(
                 name: "Catalog");
+
+            migrationBuilder.DropTable(
+                name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "WorkOrders");
+
+            migrationBuilder.DropTable(
+                name: "AccountExtends");
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gov.Context.Migrations
 {
     [DbContext(typeof(GovContext))]
-    [Migration("20210317092651_Init")]
+    [Migration("20210406064828_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1150,6 +1150,169 @@ namespace Gov.Context.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("Gov.Entity.WorkOrder", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<string>("AddressOrUrl")
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<int>("CompleteCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(5000)
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset?>("CreatedTime")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTimeOffset>("EndDate")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("PrincipalName")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("PrincipalPhone")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Priority")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Remark")
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)");
+
+                    b.Property<DateTimeOffset>("StartDate")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("TargetName")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("TotalCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("UniqueCode")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<DateTimeOffset?>("UpdatedTime")
+                        .HasColumnType("timestamp");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EndDate");
+
+                    b.HasIndex("Priority");
+
+                    b.HasIndex("StartDate");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("TargetName");
+
+                    b.HasIndex("Type");
+
+                    b.HasIndex("UniqueCode");
+
+                    b.ToTable("WorkOrders");
+                });
+
+            modelBuilder.Entity("Gov.Entity.WorkOrderExecutor", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTimeOffset?>("CreatedTime")
+                        .HasColumnType("timestamp");
+
+                    b.Property<byte[]>("ExecutorId")
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<string>("Feedback")
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<string>("Remark")
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<DateTimeOffset?>("UpdatedTime")
+                        .HasColumnType("timestamp");
+
+                    b.Property<byte[]>("WorkOrderId")
+                        .HasColumnType("varbinary(16)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedTime");
+
+                    b.HasIndex("ExecutorId");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("WorkOrderId");
+
+                    b.ToTable("WorkOrderExecutors");
+                });
+
+            modelBuilder.Entity("Gov.Entity.WorkOrderFlowLog", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTimeOffset?>("CreatedTime")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Result")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("UpdatedTime")
+                        .HasColumnType("timestamp");
+
+                    b.Property<byte[]>("WorkOrderExecutorId")
+                        .HasColumnType("varbinary(16)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedTime");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("WorkOrderExecutorId");
+
+                    b.ToTable("WorkOrderFlowLogs");
+                });
+
             modelBuilder.Entity("MenuRole", b =>
                 {
                     b.Property<byte[]>("MenusId")
@@ -1336,6 +1499,30 @@ namespace Gov.Context.Migrations
                     b.Navigation("Extend");
                 });
 
+            modelBuilder.Entity("Gov.Entity.WorkOrderExecutor", b =>
+                {
+                    b.HasOne("Gov.Entity.Account", "Executor")
+                        .WithMany("WorkOrderExecutors")
+                        .HasForeignKey("ExecutorId");
+
+                    b.HasOne("Gov.Entity.WorkOrder", "WorkOrder")
+                        .WithMany("Executors")
+                        .HasForeignKey("WorkOrderId");
+
+                    b.Navigation("Executor");
+
+                    b.Navigation("WorkOrder");
+                });
+
+            modelBuilder.Entity("Gov.Entity.WorkOrderFlowLog", b =>
+                {
+                    b.HasOne("Gov.Entity.WorkOrderExecutor", "WorkOrderExecutor")
+                        .WithMany("FlowLogs")
+                        .HasForeignKey("WorkOrderExecutorId");
+
+                    b.Navigation("WorkOrderExecutor");
+                });
+
             modelBuilder.Entity("MenuRole", b =>
                 {
                     b.HasOne("Gov.Entity.Menu", null)
@@ -1349,6 +1536,11 @@ namespace Gov.Context.Migrations
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Gov.Entity.Account", b =>
+                {
+                    b.Navigation("WorkOrderExecutors");
                 });
 
             modelBuilder.Entity("Gov.Entity.ApproveFlow", b =>
@@ -1383,6 +1575,16 @@ namespace Gov.Context.Migrations
                     b.Navigation("Children");
 
                     b.Navigation("Personnels");
+                });
+
+            modelBuilder.Entity("Gov.Entity.WorkOrder", b =>
+                {
+                    b.Navigation("Executors");
+                });
+
+            modelBuilder.Entity("Gov.Entity.WorkOrderExecutor", b =>
+                {
+                    b.Navigation("FlowLogs");
                 });
 
             modelBuilder.Entity("Gov.Entity.ArticleCatalog", b =>

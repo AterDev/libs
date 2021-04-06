@@ -1,15 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageId>GT.Gov.Context</PackageId>
+    <Company>geethin</Company>
+    <Authors>niltor</Authors>
+    <Description>政务系统数据库上下文</Description>
+    <Version>0.0.4.7</Version>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/geethin/libs</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/geethin/libs</PackageProjectUrl>
+    <PackageReleaseNotes>政务系统数据库上下文</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="GT.Gov.Entity" Version="0.0.4.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.4" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Gov.Entity\Gov.Entity.csproj" />
-  </ItemGroup>
-
 </Project>
