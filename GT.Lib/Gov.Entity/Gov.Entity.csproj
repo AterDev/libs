@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>GT.Gov.Entity</PackageId>
+    <Company>geethin</Company>
+    <Authors>niltor</Authors>
+    <Description>政务系统 常用实体类型</Description>
+    <Version>0.0.4.7</Version>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/geethin/libs</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/geethin/libs</PackageProjectUrl>
+    <PackageReleaseNotes>政务系统 常用实体类型</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
